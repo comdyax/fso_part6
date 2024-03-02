@@ -45,6 +45,9 @@ const anecdoteSlice = createSlice({
   }
 })
 
+export const { createAnecdote, voteForAnecdote } = anecdoteSlice.actions
+export default anecdoteSlice.reducer
+
 /**
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -85,6 +88,3 @@ export const createAnecdote = (content) => {
 
 export default reducer
  */
-
-export const { createAnecdote, voteForAnecdote } = anecdoteSlice.actions
-export default anecdoteSlice.reducer

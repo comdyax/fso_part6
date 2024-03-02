@@ -14,6 +14,10 @@ const filterSlice = createSlice({
 
 })
 
+export const { filterChange } = filterSlice.actions
+export default filterSlice.reducer
+
+
 /**
 const filterReducer = (state = '', action) => {
     switch (action.type) {
@@ -36,6 +40,4 @@ export const filterChange = filter => {
 export default filterReducer
  */
 
-export const { filterChange } = filterSlice.actions
-export default filterSlice.reducer
 
