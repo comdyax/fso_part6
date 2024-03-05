@@ -1,12 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-
-const initialState = 'Hello there!'
-
-
 const messageSlice = createSlice({
     name: 'message',
-    initialState,
+    initialState: 'Hello there!',
     reducers: {
         createMessage(state, action) {
             state = action.payload
@@ -22,4 +18,14 @@ const messageSlice = createSlice({
 })
 
 export const { createMessage, removeMessage } = messageSlice.actions
+
+export const setNotification = (message, time) => {
+    return dispatch => {
+        dispatch(createMessage(message))
+        setTimeout(() => {
+            dispatch(removeMessage(message))
+        }, time * 1000)
+    }
+}
+
 export default messageSlice.reducer
