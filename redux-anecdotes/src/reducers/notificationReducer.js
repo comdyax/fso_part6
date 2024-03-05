@@ -15,7 +15,6 @@ const messageSlice = createSlice({
         removeMessage(state, action) {
             if (action.payload === state)
                 state = 'Hello there!'
-            console.log(state)
             return state
         },
 
