@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { voteForAnecdote } from '../reducers/anecdoteReducer'
+import { voteAnecdote } from '../reducers/anecdoteReducer'
 import { createMessage, removeMessage } from '../reducers/notificationReducer'
 import { useMemo } from 'react';
 
@@ -17,8 +17,11 @@ const AnecdoteList = () => {
     const dispatch = useDispatch()
 
     const vote = (id) => {
-        dispatch(voteForAnecdote(id))
         const dote = anecdotes.find(dote => dote.id === id)
+        dispatch(voteAnecdote(dote))
+
+        // generate Notification
+        
         const notification = `You voted for '${dote.content}' with now ${dote.votes + 1} votes`
         dispatch(createMessage(notification))
         setTimeout(() => {
