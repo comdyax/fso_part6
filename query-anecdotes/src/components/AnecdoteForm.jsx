@@ -4,25 +4,33 @@ import { useNotificationDispatch } from './AnecContext'
 
 const AnecdoteForm = () => {
   const queryClient = useQueryClient()
+  const dispatch = useNotificationDispatch()
 
   const newAnecMutation = useMutation({
     mutationFn: createAnecdote,
     onSuccess: (newAnecdote) => {
       const anecdotes = queryClient.getQueryData(['anecdotes'])
       queryClient.setQueryData(['anecdotes'], anecdotes.concat(newAnecdote))
+    },
+    onError: () => {
+      dispatch({ type: 'ERROR' })
+      setTimeout(() => {
+        dispatch({ type: 'REMOVE' })
+      }, 6000)
     }
   })
 
-  const dispatch = useNotificationDispatch()
+
 
   const onCreate = (event) => {
     event.preventDefault()
     const content = event.target.anecdote.value
     event.target.anecdote.value = ''
     newAnecMutation.mutate({ content, votes: 0 })
-    dispatch({ type: 'NEW', payload: content })
+    const payload = `You created ${content}`
+    dispatch({ type: 'NEW', payload: payload })
     setTimeout(() => {
-      dispatch({ type: 'REMOVE' })
+      dispatch({ type: 'REMOVE', payload: payload })
     }, 6000)
   }
 

@@ -7,15 +7,19 @@ import { createContext } from "react"
 const notificationReducer = (state, action) => {
     switch (action.type) {
         case "NEW":
-            state = `You created ${action.payload}`
+            state = action.payload
             return state
         case "VOTE":
-            state = `You voted for ${action.payload}`
+            state = action.payload
 
             return state
         case "REMOVE":
-            state = ''
-            console.log(state);
+            if (action.payload === state)
+                state = ''
+            return state
+
+        case "ERROR":
+            state = 'too short, anecdote must have length 5 or more'
             return state
         default:
             return state
@@ -24,11 +28,13 @@ const notificationReducer = (state, action) => {
 
 const AnecContext = createContext()
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useNotificationDispatch = () => {
     const notificationAndDispatch = useContext(AnecContext)
     return notificationAndDispatch[1]
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useNotificationValue = () => {
     const notificationAndDispatch = useContext(AnecContext)
     return notificationAndDispatch[0]

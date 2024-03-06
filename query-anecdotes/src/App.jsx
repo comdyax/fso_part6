@@ -18,9 +18,10 @@ const App = () => {
 
   const handleVote = (anecdote) => {
     voteAnecMutation.mutate({ ...anecdote, votes: anecdote.votes + 1 })
-    dispatch({ type: 'VOTE', payload: anecdote.content })
+    const payload = `You voted for ${anecdote.content}`
+    dispatch({ type: 'VOTE', payload:  payload})
     setTimeout(() => {
-      dispatch({ type: 'REMOVE' })
+      dispatch({ type: 'REMOVE', payload: payload })
     }, 6000)
   }
 
