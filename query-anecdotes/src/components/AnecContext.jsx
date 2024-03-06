@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { useReducer } from "react"
 import { createContext } from "react"
+import PropTypes from 'prop-types'
 
 
 
@@ -53,3 +54,7 @@ export const AnecContextProvider = (props) => {
 }
 
 export default AnecContext
+
+AnecContextProvider.propTypes = {
+    children: PropTypes.node
+}
